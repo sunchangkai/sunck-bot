@@ -18,7 +18,7 @@ jobs:
 
   copy-rag:
     needs: base-infomations
-    runs-on: global-runner
+    runs-on: self-hosted
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
