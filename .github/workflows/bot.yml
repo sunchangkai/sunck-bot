@@ -34,3 +34,40 @@ jobs:
           target: /root/bot/sunck-bot
           rm: true
           tar_tmp_path: /root/bot/code_tmp
+  
+  run-rag:
+    needs: [base-infomations, copy-rag]
+    runs-on: self-hosted
+    steps:
+      - name: Stop
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          script: |
+            cd /root/bot/sunck-bot/intelligent-robot/
+            docker-compose stop
+            docker-compose down
+            docker rmi $(docker images --filter "label=maintainer=bot_system" -q) || true
+      - name: Build
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          script: |
+            cd /root/bot/sunck-bot/intelligent-robot/
+            docker-compose build
+      - name: Deploy
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          script: |
+            cd /root/bot/sunck-bot/intelligent-robot/
+            docker-compose up -d
