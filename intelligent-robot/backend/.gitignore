@@ -93,6 +93,7 @@ ENV/
 *.pyc
 conf/*
 !conf/env.example.py
+!conf/env.py
 db.sqlite3
 media/
 __pypackages__/
