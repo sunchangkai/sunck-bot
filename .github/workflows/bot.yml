@@ -16,7 +16,7 @@ jobs:
           echo "This job is now running on a ${{ runner.os }} server hosted by GitHub!"
           echo "The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
 
-copy-rag:
+  copy-rag:
     needs: base-infomations
     runs-on: global-runner
     steps:
