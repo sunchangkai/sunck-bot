@@ -9,12 +9,8 @@ services:
       dockerfile: ./docker_env/web/Dockerfile
     environment:
       TZ: Asia/Shanghai
-    volumes:
-      - ./docker_env/nginx/my.conf:/etc/nginx/conf.d/my.conf
-      - ./backend/media:/backend/media
     expose:
       - "8080"
-    restart: always
     networks:
       network:
         ipv4_address: 177.10.0.11
@@ -25,8 +21,6 @@ services:
       dockerfile: ./docker_env/django/Dockerfile
     container_name: bot-django
     working_dir: /backend
-    depends_on:
-      - bot-mysql
     environment:
       PYTHONUNBUFFERED: 1
       DATABASE_HOST: bot-mysql
