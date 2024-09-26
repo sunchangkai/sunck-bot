@@ -2,13 +2,19 @@
   <fs-page>
     <div class="dialogue-container">
       <div class="chat-header">
-        <h1 
-          @click="startEditing" 
-          title="Click to edit session name"
-          class="editable-title"
-        >
-          {{ title }}
-        </h1>
+        <div class="left-group">
+          <button @click="createNewSession" class="new-session-button">
+            新建会话
+          </button>
+          <h1 
+            @click="startEditing" 
+            title="点击编辑会话名称"
+            class="editable-title"
+          >
+            {{ title }}
+            <span class="edit-icon">✎</span>
+          </h1>
+        </div>
         <select v-model="selectedAssistant" class="assistant-select">
           <option v-for="assistant in assistants" :key="assistant.id" :value="assistant.id">
             {{ assistant.name }}
@@ -17,7 +23,7 @@
       </div>
       <div class="chat-content" ref="chatContentRef">
         <div v-if="chatHistory.length === 0" class="empty-history">
-          <p>Welcome! How can I assist you today?</p>
+          <p>欢迎！今天我能为您提供什么帮助？</p>
         </div>
         <div v-else class="chat-history">
           <div v-for="(message, index) in chatHistory" :key="index" :class="['message', message.role]">
@@ -37,7 +43,7 @@
       <div class="input-area">
         <textarea 
           v-model="userInput" 
-          placeholder="Type your message here..."
+          placeholder="在此输入您的消息..."
           @keydown.enter.prevent="sendMessage"
           rows="1"
         ></textarea>
@@ -50,17 +56,17 @@
 
   <div v-if="isEditing" class="modal-overlay" @click="cancelEditing">
     <div class="modal-content" @click.stop>
-      <h2>Edit session name</h2>
+      <h2>编辑会话名称</h2>
       <input 
         v-model="editedTitle" 
         @keyup.enter="saveTitle" 
         @keyup.esc="cancelEditing" 
         ref="titleInput"
-        placeholder="Enter new session name"
+        placeholder="输入新的会话名称"
       />
       <div class="button-group">
-        <button class="modal-button cancel-button" @click="cancelEditing">Cancel</button>
-        <button class="modal-button save-button" @click="saveTitle">Save</button>
+        <button class="modal-button cancel-button" @click="cancelEditing">取消</button>
+        <button class="modal-button save-button" @click="saveTitle">保存</button>
       </div>
     </div>
   </div>
@@ -90,9 +96,9 @@ const userInput = ref('');
 const chatContentRef = ref<HTMLElement | null>(null);
 
 const assistants = ref<Assistant[]>([
-  { id: 1, name: 'General Assistant' },
-  { id: 2, name: 'Code Helper' },
-  { id: 3, name: 'Writing Assistant' },
+  { id: 1, name: '通用助理' },
+  { id: 2, name: '代码助手' },
+  { id: 3, name: '写作助理' },
   // 可以根据需要添加更多助理
 ]);
 
@@ -153,8 +159,8 @@ const sendMessage = async () => {
     // Scroll to bottom again after typewriter effect is complete
     scrollToBottom();
   } catch (error) {
-    console.error('Failed to send message:', error);
-    chatHistory.value.push({ role: 'assistant', content: 'Sorry, an error occurred. Please try again later.', displayContent: 'Sorry, an error occurred. Please try again later.' });
+    console.error('发送消息失败:', error);
+    chatHistory.value.push({ role: 'assistant', content: '抱歉，发生了错误。请稍后再试。', displayContent: '抱歉，发生了错误。请稍后再试。' });
     
     // Scroll to bottom if error message is added
     scrollToBottom();
@@ -174,7 +180,7 @@ const getUserInitials = computed(() => {
   return username.trim().slice(0, 2).toUpperCase();
 });
 
-const DEFAULT_TITLE = 'New Session';
+const DEFAULT_TITLE = '默认会话';
 const title = ref(DEFAULT_TITLE);
 const isEditing = ref(false);
 const editedTitle = ref('');
@@ -197,6 +203,15 @@ const saveTitle = () => {
 
 const cancelEditing = () => {
   isEditing.value = false;
+};
+
+const createNewSession = () => {
+  // 重置会话状态
+  chatHistory.value = [];
+  title.value = DEFAULT_TITLE;
+  selectedAssistant.value = assistants.value[0].id;
+  // 可以在这里添加其他需要重置的状态
+  console.log('新会话已创建');
 };
 
 onMounted(() => {
@@ -223,15 +238,65 @@ onMounted(() => {
   align-items: center;
 }
 
-.chat-header h1 {
+.left-group {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.chat-header h1.editable-title {
   margin: 0;
   font-size: 20px;
   color: #333;
   cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+  padding: 5px 10px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.chat-header h1:hover {
-  text-decoration: none;
+.chat-header h1.editable-title .edit-icon {
+  font-size: 16px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.chat-header h1.editable-title:hover .edit-icon {
+  opacity: 1;
+}
+
+.chat-header h1.editable-title:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.new-session-button {
+  padding: 8px 16px;
+  font-size: 14px;
+  color: #ffffff;
+  background-color: #1677ff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: min-content;
+}
+
+.new-session-button:hover {
+  background-color: #4096ff;
+}
+
+.new-session-button:active {
+  background-color: #0958d9;
 }
 
 .assistant-select {
@@ -244,6 +309,8 @@ onMounted(() => {
   color: #333;
   cursor: pointer;
   transition: all 0.3s;
+  flex: 0 0 auto;
+  margin-left: auto;
 }
 
 .assistant-select:focus {
@@ -511,36 +578,5 @@ button svg {
 .cancel-button:active {
   background-color: #d0d0d0;
   border-color: #a6a6a6;
-}
-
-.chat-header h1.editable-title {
-  margin: 0;
-  font-size: 20px;
-  color: #333;
-  cursor: pointer;
-  position: relative;
-  display: inline-block;
-  padding: 5px 10px;
-  border-radius: 4px;
-  transition: background-color 0.3s ease;
-}
-
-.chat-header h1.editable-title::after {
-  content: '✎';
-  position: absolute;
-  right: -20px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 16px;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.chat-header h1.editable-title:hover {
-  background-color: rgba(0, 0, 0, 0.05);
-}
-
-.chat-header h1.editable-title:hover::after {
-  opacity: 1;
 }
 </style>
