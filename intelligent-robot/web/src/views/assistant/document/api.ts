@@ -1,7 +1,7 @@
 import { request } from '/@/utils/service';
 import { UserPageQuery, AddReq, DelReq, EditReq, InfoReq } from '@fast-crud/fast-crud';
 
-export const apiPrefix = '/api/assistant/datasource/';
+export const apiPrefix = '/api/assistant/document/';
 export function GetList(query: UserPageQuery) {
 	return request({
 		url: apiPrefix,

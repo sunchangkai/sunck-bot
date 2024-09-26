@@ -41,7 +41,7 @@ export const createCrudOptions = function ({crudExpose}: CreateCrudOptionsProps)
             actionbar: {
                 buttons: {
                     add: {
-                        show: auth('splitter:Create')
+                        show: auth('document:Create')
                     }
                 }
             },
@@ -56,12 +56,12 @@ export const createCrudOptions = function ({crudExpose}: CreateCrudOptionsProps)
                     edit: {
                         iconRight: 'Edit',
                         type: 'text',
-                        show: auth("splitter:Update")
+                        show: auth("document:Update")
                     },
                     remove: {
                         iconRight: 'Delete',
                         type: 'text',
-                        show: auth("splitter:Delete")
+                        show: auth("document:Delete")
                     },
                 },
             },
@@ -123,50 +123,15 @@ export const createCrudOptions = function ({crudExpose}: CreateCrudOptionsProps)
 					column:{
 						minWidth: 120,
 					},
-					form: {
-						rules: [
-							// 表单校验规则
-							{
-								required: true,
-								message: '必填项',
-							},
-							{
-							    max: 128,
-							    message: '请输入正确的名称',
-							    trigger: 'blur',
-							},
-						],
-						component: { span: 24, placeholder: '请输入名称' },
+				},
+				size: {
+					title: '大小',
+					search: {
+						show: true,
 					},
-				},
-				type: {
-				    title: '类型',
-				    type: 'dict-select',
-				    dict: dict({
-				        data: dictionary('splitter_type'),
-				    }),
-				    form: {
-				        value: 0,
-				        component: {
-				            span: 12,
-				        },
-				    },
-				    component: {props: {color: 'auto'}}, 
-				},
-				parameters: {
-					title: '参数',
 					type: ['text', 'colspan'],
 					column:{
-						minWidth:  300,
-					},
-					form: {
-						rules: [
-							{
-								required: true,
-								message: '必填项',
-							},
-						],
-						component: { span: 24, placeholder: '请输入参数' },
+						width: 200,
 					},
 				},
             },

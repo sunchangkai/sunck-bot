@@ -14,7 +14,7 @@ import {dictionary} from '/@/utils/dictionary';
 import {successMessage} from '/@/utils/message';
 import {auth} from '/@/utils/authFunction'
 
-export const createCrudOptions = function ({crudExpose}: CreateCrudOptionsProps): CreateCrudOptionsRet {
+export const createCrudOptions = function ({crudExpose, pushDocumenPage}: {CreateCrudOptionsProps: CreateCrudOptionsProps; pushDocumenPage: Function}): CreateCrudOptionsRet {
     const pageRequest = async (query: UserPageQuery) => {
         return await api.GetList(query);
     };
@@ -41,14 +41,14 @@ export const createCrudOptions = function ({crudExpose}: CreateCrudOptionsProps)
             actionbar: {
                 buttons: {
                     add: {
-                        show: auth('vectordb:Create')
+                        show: auth('datasource:Create')
                     }
                 }
             },
             rowHandle: {
                 //固定右侧
                 fixed: 'right',
-                width: 150,
+                width: 230,
                 buttons: {
                     view: {
                         show: false,
@@ -56,13 +56,22 @@ export const createCrudOptions = function ({crudExpose}: CreateCrudOptionsProps)
                     edit: {
                         iconRight: 'Edit',
                         type: 'text',
-                        show: auth("vectordb:Update")
+                        show: auth("datasource:Update")
                     },
                     remove: {
                         iconRight: 'Delete',
                         type: 'text',
-                        show: auth("vectordb:Delete")
+                        show: auth("datasource:Delete")
                     },
+					document: {
+					    type: 'primary',
+					    text: '查看文档',
+					    // show: auth('datasource:Document'),
+					    click: (context: any): void => {
+					        const {row} = context;
+					        pushDocumenPage(row);
+					    },
+					},
                 },
             },
             form: {
@@ -132,53 +141,11 @@ export const createCrudOptions = function ({crudExpose}: CreateCrudOptionsProps)
 							},
 							{
 							    max: 128,
-							    message: '请输入正确的手机号码',
+							    message: '请输入正确的名称',
 							    trigger: 'blur',
 							},
 						],
 						component: { span: 24, placeholder: '请输入名称' },
-					},
-				},
-				host: {
-					title: 'IP',
-					type: ['text'],
-					column:{
-						width: 200,
-					},
-					form: {
-						rules: [
-							// 表单校验规则
-							{
-								required: true,
-								message: '必填项',
-							},
-							{
-							    pattern: /^((25[0-5]|2[0-4]\d|[01]?\d\d?)\.){3}(25[0-5]|2[0-4]\d|[01]?\d\d?)$/,
-							    message: '请输入正确的IP',
-							},
-						],
-						component: { span: 24, placeholder: '请输入IP' },
-					},
-				},
-				port: {
-					title: '端口',
-					type: ['text', 'colspan'],
-					column:{
-						width: 100,
-					},
-					form: {
-						rules: [
-							// 表单校验规则
-							{
-								required: true,
-								message: '必填项',
-							},
-							{
-							    pattern: /^(?:[0-9]{1,4}|[1-5][0-9]{4}|6[0-5][0-5][0-3][0-5])$/,
-							    message: '请输入正确的端口',
-							},
-						],
-						component: { span: 24, placeholder: '请输入端口' },
 					},
 				},
             },

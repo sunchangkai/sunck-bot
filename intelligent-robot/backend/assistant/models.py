@@ -28,5 +28,19 @@ class Splitter(CoreModel):
         db_table = "assistant_splitter"
         ordering = ("-create_datetime",)
 
+class DataSource(CoreModel):
+    name = models.CharField(max_length=128, unique=True)
+    class Meta:
+        db_table = "assistant_datasource"
+        ordering = ("-create_datetime",)
+
+class Document(CoreModel):
+    data_source = models.ForeignKey(to=DataSource, on_delete=models.CASCADE, db_index=True, db_constraint=False)
+    name = models.CharField(max_length=128)
+    path = models.CharField(max_length=255, unique=True)
+    size = models.BigIntegerField(default=0)
+    class Meta:
+        db_table = "assistant_document"
+        ordering = ("data_source", "-create_datetime",)
 
 

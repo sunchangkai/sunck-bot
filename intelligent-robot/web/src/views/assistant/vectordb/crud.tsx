@@ -132,7 +132,7 @@ export const createCrudOptions = function ({crudExpose}: CreateCrudOptionsProps)
 							},
 							{
 							    max: 128,
-							    message: '请输入正确的手机号码',
+							    message: '请输入正确的名称',
 							    trigger: 'blur',
 							},
 						],
