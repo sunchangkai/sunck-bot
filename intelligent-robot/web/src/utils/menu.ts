@@ -62,7 +62,7 @@ export const handleMenu = (menuData: Array<any>) => {
     })
     const dynamicRoutes = [
         {
-            path: '/home', name: 'home', component: '/system/home/index', meta: {
+            path: '/api/dialogue', name: 'dialogue', component: '/assistant/dialogue/index', meta: {
                 title: 'message.router.home',
                 isLink: '',
                 isHide: false,

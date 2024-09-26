@@ -1,7 +1,7 @@
 // 定义内容
 export default {
     router: {
-        home: '首页',
+        home: '对话',
         system: '系统管理',
         config: '常规配置',
         log: '日志管理',
@@ -45,7 +45,7 @@ export default {
         dropdownLarge: '大型',
         dropdownDefault: '默认',
         dropdownSmall: '小型',
-        dropdown1: '首页',
+        dropdown1: '对话',
         dropdown2: '个人中心',
         dropdown3: '404',
         dropdown4: '401',
@@ -73,7 +73,7 @@ export default {
     notFound: {
         foundTitle: '地址输入错误，请重新输入地址~',
         foundMsg: '您可以先检查网址，然后重新输入或给我们反馈问题。',
-        foundBtn: '返回首页',
+        foundBtn: '返回对话页',
     },
     noAccess: {
         accessTitle: '您未被授权，没有操作权限~',

@@ -19,9 +19,9 @@ DATABASE_HOST = '39.105.228.75'
 # # 数据库端口
 DATABASE_PORT = 3306
 # # 数据库用户名
-DATABASE_USER = "sunck"
+DATABASE_USER = "sunck"#root
 # # 数据库密码
-DATABASE_PASSWORD = 'sunck2000'
+DATABASE_PASSWORD = 'sunck2000'#U:3qyi;FGtVp
 
 # 表前缀
 TABLE_PREFIX = "bot_"

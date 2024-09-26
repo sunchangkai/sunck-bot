@@ -1,7 +1,7 @@
 // 定义内容
 export default {
     router: {
-        home: 'home',
+        home: 'dialogue',
         system: 'system',
         systemMenu: 'systemMenu',
         systemRole: 'systemRole',
@@ -32,7 +32,7 @@ export default {
         dropdownLarge: 'large',
         dropdownDefault: 'default',
         dropdownSmall: 'small',
-        dropdown1: 'home page',
+        dropdown1: 'dialogue page',
         dropdown2: 'Personal Center',
         dropdown3: '404',
         dropdown4: '401',
@@ -60,7 +60,7 @@ export default {
     notFound: {
         foundTitle: 'Wrong address input, please re-enter the address~',
         foundMsg: 'You can check the web address first, and then re-enter or give us feedback.',
-        foundBtn: 'Back to home page',
+        foundBtn: 'Back to dialogue page',
     },
     noAccess: {
         accessTitle: 'You are not authorized to operate~',

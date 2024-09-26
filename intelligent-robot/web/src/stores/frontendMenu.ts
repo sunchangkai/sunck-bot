@@ -114,8 +114,8 @@ export const handleMenu = (menuData: Array<any>) => {
     })
     const dynamicRoutes = [
         {
-            path: '/home', name: 'home',
-            component: dynamicImport(dynamicViewsModules, '/system/home/index'),
+            path: '/api/dialogue', name: 'dialogue',
+            component: dynamicImport(dynamicViewsModules, '/assistant/dialogue/index'),
             meta: {
                 title: 'message.router.home',
                 isLink: '',
