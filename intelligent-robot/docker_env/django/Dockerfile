@@ -1,5 +1,4 @@
 FROM registry.cn-zhangjiakou.aliyuncs.com/dvadmin-pro/dvadmin3-base-backend:latest
-LABEL maintainer="bot_system"
 WORKDIR /backend
 COPY ./backend/ .
 RUN ls ./conf/

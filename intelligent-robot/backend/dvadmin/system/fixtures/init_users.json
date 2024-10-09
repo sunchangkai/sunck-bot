@@ -1,8 +1,8 @@
 [
   {
     "username": "superadmin",
-    "email": "dvadmin@django-vue-admin.com",
-    "mobile": "13333333333",
+    "email": "dvadmin1@django-vue-admin.com",
+    "mobile": "13333333331",
     "avatar": null,
     "name": "超级管理员",
     "gender": 1,
@@ -22,8 +22,8 @@
   },
   {
     "username": "admin",
-    "email": "dvadmin@django-vue-admin.com",
-    "mobile": "18888888888",
+    "email": "dvadmin2@django-vue-admin.com",
+    "mobile": "18888888882",
     "avatar": "",
     "name": "管理员",
     "gender": 1,
@@ -40,8 +40,8 @@
   },
   {
     "username": "test",
-    "email": "dvadmin@django-vue-admin.com",
-    "mobile": "18888888888",
+    "email": "dvadmin3@django-vue-admin.com",
+    "mobile": "18888888883",
     "avatar": "",
     "name": "测试人员",
     "gender": 1,

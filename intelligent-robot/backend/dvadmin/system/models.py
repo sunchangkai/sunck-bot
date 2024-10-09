@@ -38,8 +38,8 @@ class CustomUserManager(UserManager):
 class Users(CoreModel, AbstractUser):
     username = models.CharField(max_length=150, unique=True, db_index=True, verbose_name="用户账号",
                                 help_text="用户账号")
-    email = models.EmailField(max_length=255, verbose_name="邮箱", null=True, blank=True, help_text="邮箱")
-    mobile = models.CharField(max_length=255, verbose_name="电话", null=True, blank=True, help_text="电话")
+    email = models.EmailField(max_length=255, unique=True, verbose_name="邮箱", null=True, blank=True, help_text="邮箱")
+    mobile = models.CharField(max_length=255, unique=True, verbose_name="电话", null=True, blank=True, help_text="电话")
     avatar = models.CharField(max_length=255, verbose_name="头像", null=True, blank=True, help_text="头像")
     name = models.CharField(max_length=40, verbose_name="姓名", help_text="姓名")
     GENDER_CHOICES = (

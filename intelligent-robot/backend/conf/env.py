@@ -12,7 +12,7 @@ from application.settings import BASE_DIR
 
 # 使用mysql时，改为此配置
 DATABASE_ENGINE = "django.db.backends.mysql"
-DATABASE_NAME = 'bot' # mysql 时使用
+DATABASE_NAME = 'bot'
 
 # 数据库地址 改为自己数据库地址
 DATABASE_HOST = '39.105.228.75'
@@ -24,14 +24,13 @@ DATABASE_USER = "sunck"#root
 DATABASE_PASSWORD = 'sunck2000'#U:3qyi;FGtVp
 
 # 表前缀
-TABLE_PREFIX = "bot_"
+TABLE_PREFIX = "intelligent_"
 # ================================================= #
 # ******** redis配置，无redis 可不进行配置  ******** #
 # ================================================= #
 REDIS_DB = 1
 CELERY_BROKER_DB = 3
 REDIS_PASSWORD = ''
-
 REDIS_HOST = '39.105.228.75'
 REDIS_URL = f'redis://:{REDIS_PASSWORD or ""}@{REDIS_HOST}:6379'
 # ================================================= #
