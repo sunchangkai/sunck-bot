@@ -16,7 +16,7 @@ class DocumentSerializer(CustomModelSerializer):
 class DocumentViewSet(CustomModelViewSet):
     queryset = Document.objects.all()
     serializer_class = DocumentSerializer
-    search_fields = ['name', "data_source"]
+    search_fields = ['name', "data_source__id"]
 
     @action(methods=["POST"], detail=False, permission_classes=[IsAuthenticated])
     def upload_data(self, request):
@@ -31,5 +31,5 @@ class DocumentViewSet(CustomModelViewSet):
             Document.objects.create(name=name, path=file_url, size=size, data_source=datasource)
             return SuccessResponse(msg="Upload success")
         except Exception as e:
-            return ErrorResponse(msg=str(e))
+            return SuccessResponse(msg="Upload failure")
 

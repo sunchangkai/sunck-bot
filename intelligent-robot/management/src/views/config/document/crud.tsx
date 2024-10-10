@@ -18,7 +18,6 @@ export const createCrudOptions = function ({crudExpose}: CreateCrudOptionsProps)
 	
     const pageRequest = async (query: UserPageQuery) => {
 		// query["data_source__id"] = 1
-		console.log("------pageRequest-----", query)
         return await api.GetList(query);
     };
     const editRequest = async ({form, row}: EditReq) => {
